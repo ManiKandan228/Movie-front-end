@@ -83,7 +83,7 @@ const EditMovieComponent = () => {
     .then((response)=>
       {
         alert(`${movieInfo.movie_name} is updated successfully`)
-        window.location.href = '/'
+        window.location.href = '/admin'
         console.log(response)
       })
       .catch((error)=>

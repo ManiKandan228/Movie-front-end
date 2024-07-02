@@ -18,52 +18,11 @@ const AddNewMovieComponent = () => {
     setImg(event.target.files[0]);
   };
 
-  const IDHandler = (event) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setMovieInfo({
       ...movieInfo,
-      id: event.target.value,
-    });
-  };
-
-  const movieNameHandler = (event) => {
-    setMovieInfo({
-      ...movieInfo,
-      movie_name: event.target.value,
-    });
-  };
-
-  const yearHandler = (event) => {
-    setMovieInfo({
-      ...movieInfo,
-      year: event.target.value,
-    });
-  };
-
-  const genre1Handler = (event) => {
-    setMovieInfo({
-      ...movieInfo,
-      genre1: event.target.value,
-    });
-  };
-
-  const genre2Handler = (event) => {
-    setMovieInfo({
-      ...movieInfo,
-      genre2: event.target.value,
-    });
-  };
-
-  const ratingHandler = (event) => {
-    setMovieInfo({
-      ...movieInfo,
-      rating: event.target.value,
-    });
-  };
-
-  const synopsisHandler = (event) => {
-    setMovieInfo({
-      ...movieInfo,
-      synopsis: event.target.value,
+      [name]: value,
     });
   };
 
@@ -83,7 +42,7 @@ const AddNewMovieComponent = () => {
     })
       .then((response) => {
         alert(`${response.data.data.movie_name} is added successfully`);
-        window.location.href = '/';
+        window.location.href = '/admin';
         console.log(response);
       })
       .catch((error) => {
@@ -97,15 +56,16 @@ const AddNewMovieComponent = () => {
 
   return (
     <form className='form-container' onSubmit={formSubmitHandler}>
-      <h2>Adding a new Movie</h2>
+      <h2>Add a New Movie</h2>
 
       <div className='form-group'>
         <label>Movie Name</label>
         <input
           type='text'
+          name='movie_name'
           placeholder='Enter the Movie name'
           value={movieInfo.movie_name}
-          onChange={movieNameHandler}
+          onChange={handleChange}
           required
         />
       </div>
@@ -114,43 +74,46 @@ const AddNewMovieComponent = () => {
         <label>ID Number</label>
         <input
           type='text'
-          placeholder='Enter the id Number'
+          name='id'
+          placeholder='Enter the ID Number'
           value={movieInfo.id}
-          onChange={IDHandler}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className='form-group'>
-        <label>Movie Released Year</label>
+        <label>Released Year</label>
         <input
           type='text'
-          className='form-control'
+          name='year'
           placeholder='Enter the Year'
           value={movieInfo.year}
-          onChange={yearHandler}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className='form-group'>
-        <label>Genre-1</label>
+        <label>Genre 1</label>
         <input
           type='text'
-          placeholder='Enter the genre-1'
+          name='genre1'
+          placeholder='Enter Genre 1'
           value={movieInfo.genre1}
-          onChange={genre1Handler}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className='form-group'>
-        <label>Genre-2</label>
+        <label>Genre 2</label>
         <input
           type='text'
-          placeholder='Enter the genre-2'
+          name='genre2'
+          placeholder='Enter Genre 2'
           value={movieInfo.genre2}
-          onChange={genre2Handler}
+          onChange={handleChange}
           required
         />
       </div>
@@ -159,10 +122,10 @@ const AddNewMovieComponent = () => {
         <label>IMDB Rating</label>
         <input
           type='text'
-          className='form-control'
-          placeholder='Enter the rating'
+          name='rating'
+          placeholder='Enter the Rating'
           value={movieInfo.rating}
-          onChange={ratingHandler}
+          onChange={handleChange}
           required
         />
       </div>
@@ -171,21 +134,26 @@ const AddNewMovieComponent = () => {
         <label>Synopsis</label>
         <input
           type='text'
-          className='form-control'
+          name='synopsis'
           placeholder='Enter the Synopsis'
           value={movieInfo.synopsis}
-          onChange={synopsisHandler}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className='form-group'>
+        <label>Upload Image</label>
+        <input
+          type='file'
+          name='image'
+          onChange={handleFileChange}
           required
         />
       </div>
 
       <div>
-        <h1>Upload Image</h1>
-        <input onChange={handleFileChange} type='file' name='image' />
-      </div>
-
-      <div>
-        <button type='submit'>Add</button>
+        <button type='submit'>Add Movie</button>
       </div>
     </form>
   );

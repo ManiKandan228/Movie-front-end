@@ -46,7 +46,7 @@ const DeleteMovieComponent = () => {
     .then((response)=>
       {
         alert(`${movieInfo.movie_name} is deleted successfully`)
-        window.location.href = '/'
+        window.location.href = '/admin'
       })
       .catch((error)=>
       {
